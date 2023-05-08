@@ -3,6 +3,7 @@ package pos.ui;
 import com.formdev.flatlaf.FlatLightLaf;
 import custom.FoodItemUI;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,8 @@ public class MainUI extends javax.swing.JFrame {
         this.setBackground(new Color(255, 255, 255));
         
         foodItems = new ArrayList<>();
+        
+        //for menu tab
     }
 
     /**
@@ -60,6 +63,7 @@ public class MainUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         orderScrollPane = new javax.swing.JScrollPane();
         orderPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         transactionPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         totalCostTxt = new javax.swing.JLabel();
@@ -216,9 +220,9 @@ public class MainUI extends javax.swing.JFrame {
         lunchFilterBtn.setaHoverColor(new java.awt.Color(255, 204, 128));
         lunchFilterBtn.setaIconPath("lunch.png");
 
-        dinnerFilterBtn.setaClickedColor(new java.awt.Color(171, 71, 188));
+        dinnerFilterBtn.setaClickedColor(new java.awt.Color(229, 57, 53));
         dinnerFilterBtn.setaFilterName("Dinner");
-        dinnerFilterBtn.setaHoverColor(new java.awt.Color(206, 147, 216));
+        dinnerFilterBtn.setaHoverColor(new java.awt.Color(239, 83, 80));
         dinnerFilterBtn.setaIconPath("dinner.png");
 
         dessertFilterBtn.setaClickedColor(new java.awt.Color(244, 143, 177));
@@ -329,17 +333,35 @@ public class MainUI extends javax.swing.JFrame {
         orderScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         orderScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        orderPanel.setBackground(new java.awt.Color(255, 255, 255));
         orderPanel.setPreferredSize(new java.awt.Dimension(312, 30));
+
+        jPanel3.setBackground(new java.awt.Color(153, 204, 0));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 306, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 276, Short.MAX_VALUE))
         );
 
         orderScrollPane.setViewportView(orderPanel);
@@ -510,7 +532,7 @@ public class MainUI extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, true
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -602,15 +624,14 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addItemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editItemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -618,7 +639,7 @@ public class MainUI extends javax.swing.JFrame {
                         .addComponent(deleteItemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteAllBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -673,14 +694,17 @@ public class MainUI extends javax.swing.JFrame {
         //deletes a row on the table
         DefaultTableModel tableModel = (DefaultTableModel) itemTable.getModel();
         
-        if(itemTable.getSelectedRow() != -1) { 
+        if(itemTable.getSelectedRow() != -1) {
             tableModel.removeRow(itemTable.getSelectedRow());
             //pop up window (success)
         }
         else {
             System.out.println("No row selected");
-            //add a pop up window (failed)
+            JOptionPane.showMessageDialog(this, "No row selected", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_deleteItemBtnActionPerformed
 
     private void editItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editItemBtnActionPerformed
@@ -699,9 +723,6 @@ public class MainUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteAllBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -721,6 +742,16 @@ public class MainUI extends javax.swing.JFrame {
     ////////////////////    CUSTOM METHODS  ////////////////////    
     ////////////////////////////////////////////////////////////
     
+    public int getTotalFoodItemHeight() {
+        int height = 0;
+        
+        for(int i=0; i<foodItems.size(); i++) {
+            height += foodItems.get(i).getPreferredSize().height + 6;
+        }
+        
+        return height;
+    }
+    
     public void updateMenu() {
         for(int i=0; i<foodItems.size(); i++) {
             menu.add(foodItems.get(i));
@@ -736,12 +767,19 @@ public class MainUI extends javax.swing.JFrame {
         item.setBounds(0, posY, item.getPreferredSize().width, 
                 item.getPreferredSize().height);
         
+        //extends the menuPanel height if all columns is larger than the menu panel
+        if(getTotalFoodItemHeight() > menu.getPreferredSize().height) {
+            menu.setPreferredSize(new Dimension(menu.getPreferredSize().width,
+                    menu.getPreferredSize().height + foodItems.get(0).getPreferredSize().height + (bottomGap+3)));
+        }
+
         //adds the object to the menu scrollpane
           foodItems.add(item);
           posY += item.getPreferredSize().height + bottomGap; //adds gap to the next item
           updateMenu(); //updates the menuUi
     }
     
+    //modifies the selected row item in itemTable
     public void modifyItem(int row, String foodType, String foodName, float price, boolean availability) {
         DefaultTableModel tableModel = (DefaultTableModel) itemTable.getModel();
         
@@ -791,6 +829,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private custom.ItemFilter lunchFilterBtn;

@@ -43,6 +43,9 @@ public class ItemEditorUI extends javax.swing.JFrame {
             
             priceField.setText(tableModel.getValueAt(
                     itemTable.getSelectedRow(), 2).toString());
+            
+            availableChk.setSelected((boolean)tableModel.getValueAt(itemTable.getSelectedRow(),
+                    3));
         }
     }
 
@@ -61,6 +64,7 @@ public class ItemEditorUI extends javax.swing.JFrame {
         priceField = new javax.swing.JTextField();
         functionBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        availableChk = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("FoodTerria | Item Editor");
@@ -101,6 +105,8 @@ public class ItemEditorUI extends javax.swing.JFrame {
 
         jLabel4.setText("Price");
 
+        priceField.setText("0.00");
+
         functionBtn.setText("HEHE");
         functionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +121,9 @@ public class ItemEditorUI extends javax.swing.JFrame {
             }
         });
 
+        availableChk.setSelected(true);
+        availableChk.setText("Available");
+
         javax.swing.GroupLayout rootPanelLayout = new javax.swing.GroupLayout(rootPanel);
         rootPanel.setLayout(rootPanelLayout);
         rootPanelLayout.setHorizontalGroup(
@@ -128,12 +137,17 @@ public class ItemEditorUI extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(foodNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(foodTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(rootPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(foodNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(foodTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(rootPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(availableChk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(rootPanelLayout.createSequentialGroup()
                         .addComponent(functionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,7 +172,8 @@ public class ItemEditorUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(availableChk))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(functionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,14 +234,15 @@ public class ItemEditorUI extends javax.swing.JFrame {
             String foodName = foodNameField.getText();
             String foodType = (String) foodTypeComboBox.getSelectedItem();
             float price = Float.parseFloat(priceField.getText());
+            boolean availability = availableChk.isSelected();
         
             //adds new item to row
-            Object[] newRow = {foodType, foodName, price, true};
+            Object[] newRow = {foodType, foodName, price, availability};
         
             tableModel.addRow(newRow);
             
             //updates menuUI
-            main.addItemtoMenu(foodType, foodName, price, true);
+            main.addItemtoMenu(foodType, foodName, price, availability);
         }
         else if(function.equalsIgnoreCase("Update")) {
             System.out.println("Updating");
@@ -235,16 +251,18 @@ public class ItemEditorUI extends javax.swing.JFrame {
             String foodName = foodNameField.getText();
             String foodType = (String) foodTypeComboBox.getSelectedItem();
             float price = Float.parseFloat(priceField.getText());
+            boolean availability = availableChk.isSelected();
             
             //updates menuUI
             System.out.println(itemTable.getSelectedRow());
             main.modifyItem(itemTable.getSelectedRow(), foodType, foodName, price, 
-                    true); //fix this (issue: it adds rather than edit
+                    availability);
             
             //updates the current to new value and adds to the table
             tableModel.setValueAt(foodType, itemTable.getSelectedRow(), 0);
             tableModel.setValueAt(foodName, itemTable.getSelectedRow(), 1);
             tableModel.setValueAt(price, itemTable.getSelectedRow(), 2);
+            tableModel.setValueAt(availability, itemTable.getSelectedRow(), 3);
         }
         
         setVisible(false); //closes item editor
@@ -284,6 +302,7 @@ public class ItemEditorUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox availableChk;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField foodNameField;
     private javax.swing.JComboBox<String> foodTypeComboBox;

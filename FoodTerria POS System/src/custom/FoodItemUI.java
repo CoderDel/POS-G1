@@ -1,5 +1,6 @@
 package custom;
 
+import custom.listener.FoodItemMouseListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
@@ -20,12 +21,14 @@ public class FoodItemUI extends javax.swing.JPanel {
         initComponents();
         
         this.foodType = foodType;
-        updateFoodInfo(foodType, foodName, price, availability);
-        
         availableColor = new Color(0,200,83);
         notAvailableColor = new Color(244, 67, 54);
+        updateFoodInfo(foodType, foodName, price, availability);
         
         setPreferredSize(new Dimension(617, 100));
+        
+        FoodItemMouseListener fi = new FoodItemMouseListener(this);
+        this.addMouseListener(fi);
     }
     
     //getters 
@@ -89,26 +92,31 @@ public class FoodItemUI extends javax.swing.JPanel {
             case "Breakfast":
                 setDefaultColor(new Color(255,245,157));
                 setHoverColor(new Color(255,238,88));
+                setClickedColor(new Color(253, 216, 53));
                 name = "breakfast.png";
                 break;
             case "Lunch":
                 setDefaultColor(new Color(255,204,128));
                 setHoverColor(new Color(255,183,77));
+                setClickedColor(new Color(255, 167, 38));
                 name = "lunch.png";
                 break;
             case "Dinner":
                 setDefaultColor(new Color(206, 147, 216));
                 setHoverColor(new Color(186, 104, 200));
+                setClickedColor(new Color(171, 71, 188));
                 name = "dinner.png";
                 break;
             case "Dessert":
                 setDefaultColor(new Color(248,187,208));
                 setHoverColor(new Color(244,143,177));
+                setClickedColor(new Color(240, 98, 146));
                 name = "dessert.png";
                 break;
             case "Drink":
                 setDefaultColor(new Color(128,222,234));
                 setHoverColor(new Color(77,208,225));
+                setClickedColor(new Color(38, 198, 218));
                 name = "drinks.png";
                 break;
             default:
@@ -120,17 +128,23 @@ public class FoodItemUI extends javax.swing.JPanel {
         
     }
     
+    public void setFoodTypeText() {
+        
+    }
+    
     public void setAvailability(boolean availability) {
         if(availability)
             foodStatus.setBackground(availableColor);
         else
             foodStatus.setBackground(notAvailableColor);
+        
     }
     
     public void updateFoodInfo(String type, String name, float price, boolean availability) {
         setaFoodType(type);
         setaFoodName(name);
         setaPriceTxt(price);
+        setAvailability(availability);
     }
     
     
